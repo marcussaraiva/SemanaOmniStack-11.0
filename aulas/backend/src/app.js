@@ -1,7 +1,8 @@
 // Arquivo principal da aplicação
-const express = require('express'); // Importando Express (pacote)
-const cors = require('cors'); 
-const routes = require('./routes'); // Importando Routes (pasta)
+const express     = require('express'); // Importando Express (pacote)
+const cors        = require('cors'); 
+const routes      = require('./routes'); // Importando Routes (pasta)
+const { errors }  = require('celebrate'); 
 
 
 const app = express();
@@ -9,7 +10,7 @@ const app = express();
 app.use(cors());
 app.use(express.json()); // Converter as requisiçoes em um JSON
 app.use(routes); // Tem que ser abaixo do 'app.use(express.json());'
-
+app.use(errors());
 
 /* 
     METODOS HTTP:
@@ -28,5 +29,4 @@ app.use(routes); // Tem que ser abaixo do 'app.use(express.json());'
     REQUEST BODY: Corpo da requisição, utilizado para criar ou alterar recursos
 
  */
-
-app.listen(3333);   //Qual porta a aplicaçao vai ouvir
+module.exports = app;  //Qual porta a aplicaçao vai ouvir
